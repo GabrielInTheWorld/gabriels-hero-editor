@@ -1,11 +1,12 @@
+// external imports
 import { Component, OnInit, Input } from '@angular/core';
 import {ActivatedRoute, ActivationEnd} from '@angular/router';
 import {Location} from '@angular/common';
 
-// custom components
+// internal components
 import {Hero} from '../hero';
 
-// custom services
+// internal services
 import {HeroService} from '../hero.service';
 
 @Component({
@@ -27,12 +28,19 @@ export class HeroDetailComponent implements OnInit {
     this.getHero();
   }
 
+  /**
+   * Get id from URL.
+   * Fetch the hero according to the id.
+   */
   getHero(): void {
     const id = +this.activeRoute.snapshot.paramMap.get('id');
     this.heroService.getHero(id)
     .subscribe(hero => this.hero = hero);
   }
 
+  /**
+   * Go back to the last location.
+   */
   goBack(): void {
     this.location.back();
   }
