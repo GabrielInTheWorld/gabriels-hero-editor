@@ -1,0 +1,43 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/angular-tour-of-heroes/dist
+/angular-tour-of-heroes/tmp
+/angular-tour-of-heroes/out-tsc
+
+# dependencies
+/angular-tour-of-heroes/node_modules
+
+# profiling files
+chrome-profiler-events.json
+speed-measure-plugin.json
+
+# IDEs and editors
+/angular-tour-of-heroes/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/angular-tour-of-heroes/.sass-cache
+/angular-tour-of-heroes/connect.lock
+/angular-tour-of-heroes/coverage
+/angular-tour-of-heroes/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/angular-tour-of-heroes/typings
+
+# System Files
+.DS_Store
+Thumbs.db
