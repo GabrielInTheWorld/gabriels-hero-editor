@@ -1,5 +1,8 @@
+// external components
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+
+// internal components
 import {HeroesComponent} from './heroes/heroes.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {HeroDetailComponent} from './hero-detail/hero-detail.component';

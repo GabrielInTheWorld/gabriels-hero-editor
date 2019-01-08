@@ -1,4 +1,7 @@
+// external imports
 import { Component, OnInit } from '@angular/core';
+
+// internal services
 import {MessageService} from '../message.service';
 
 @Component({
