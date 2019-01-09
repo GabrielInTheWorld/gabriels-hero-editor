@@ -4,6 +4,7 @@
 /angular-tour-of-heroes/dist
 /angular-tour-of-heroes/tmp
 /angular-tour-of-heroes/out-tsc
+/angular-tour-of-heroes/documentation
 
 # dependencies
 /angular-tour-of-heroes/node_modules
