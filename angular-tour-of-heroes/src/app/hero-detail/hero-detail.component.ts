@@ -9,6 +9,9 @@ import {Hero} from '../hero';
 // internal services
 import {HeroService} from '../hero.service';
 
+/**
+ * Necessary templates and the selector
+ */
 @Component({
   selector: 'app-hero-detail',
   templateUrl: './hero-detail.component.html',
@@ -16,14 +19,27 @@ import {HeroService} from '../hero.service';
 })
 export class HeroDetailComponent implements OnInit {
 
+  /**
+   * Changeable classmember.
+   * Relates to the input-element in the related component.
+   */
   @Input() hero: Hero;
 
+  /**
+   * constructor
+   * @param location get the app's Location to go back.
+   * @param activeRoute hold the ActivatedRoute to get the param from URL.
+   * @param heroService injects the HeroService to fetch a specific hero.
+   */
   constructor(
     private location: Location,
     private activeRoute: ActivatedRoute,
     private heroService: HeroService
   ) { }
 
+  /**
+   * init-function
+   */
   ngOnInit() {
     this.getHero();
   }

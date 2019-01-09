@@ -1,6 +1,9 @@
 // internal components
 import {Hero} from './hero';
 
+/**
+ * exports the mock-data for heroes as an array.
+ */
 export const HEROES: Hero[] = [
   {id: 11, name: 'Mr. Nice'},
   {id: 12, name: 'Naraco'},

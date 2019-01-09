@@ -11,11 +11,22 @@ import {MessageService} from './message.service';
 // mock-data
 import {HEROES} from './mock-heroes';
 
+/**
+ * Injectable
+ */
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ * class HeroService
+ */
 export class HeroService {
 
+  /**
+   * constructor
+   * @param messageService injects the MessageService as private member to add messages after fetching heroes.
+   */
   constructor(private messageService: MessageService) { }
 
   /**
