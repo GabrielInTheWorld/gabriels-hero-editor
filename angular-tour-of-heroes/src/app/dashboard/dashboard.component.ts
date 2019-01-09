@@ -7,17 +7,35 @@ import {Hero} from '../hero';
 // internal services
 import {HeroService} from '../hero.service';
 
+/**
+ * Necessary templates and the selector
+ */
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 
+/**
+ * class DashboardComponent
+ */
 export class DashboardComponent implements OnInit {
+
+  /**
+   * Classmember to store the first four heroes
+   * and display them in the dashboard.
+   */
   heroes: Hero[] = [];
 
+  /**
+   * constructor
+   * @param heroService injects the HeroService to fetch the heroes from database.
+   */
   constructor(private heroService: HeroService) { }
 
+  /**
+   * init-function
+   */
   ngOnInit() {
     // get the related heroes for the dashboard
     this.getHeroes();
