@@ -25,7 +25,7 @@ export class HeroesComponent implements OnInit {
   /**
    * {Array} to store all fetched heroes from database.
    */
-  heroes: Hero[];
+  heroes: Hero[] = [];
 
   /**
    * constructor
@@ -39,6 +39,7 @@ export class HeroesComponent implements OnInit {
    */
   ngOnInit() {
     this.getHeroes();
+    this.onWatch();
   }
 
   /**
@@ -46,6 +47,19 @@ export class HeroesComponent implements OnInit {
    */
   private getHeroes(): void {
     this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes);
+    .subscribe(heroes => this.heroes = heroes);
+  }
+
+  /**
+   * Private function to subscribe to the websocket-connection from hero-service.
+   * If the connection sends an update, the component will read information from server once again.
+   */
+  private onWatch(): void {
+    this.heroService.getWebsocket()
+    .subscribe(event => {
+      if (event['type'] === 'update') {
+        this.getHeroes();
+      }
+    });
   }
 }

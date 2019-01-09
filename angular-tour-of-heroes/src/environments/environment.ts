@@ -2,8 +2,19 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+/**
+ * Set if this is in production- or development-mode.
+ */
 export const environment = {
   production: false
+};
+
+/**
+ * Constant to set the URL and port of the server and the websocket.
+ */
+export const SERVER_URL = {
+  server: 'http://127.0.0.1:8000',
+  websocket: 'ws://127.0.0.1:8000/ws'
 };
 
 /*

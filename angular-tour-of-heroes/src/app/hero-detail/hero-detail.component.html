@@ -4,9 +4,17 @@
   <div><span>id: </span>{{ hero.id }}</div>
   <div>
     <label>name:
-      <input [(ngModel)]="hero.name" placeholder="name" />
+      <input [ngModel]="hero.name" (ngModelChange)="onChange($event)" placeholder="name" />
     </label>
   </div>
   <!-- back button -->
   <button (click)="goBack()">Go back</button>
+  <!-- submit button -->
+  <div class="button" *ngIf="isCreating && hero.name !== ''">
+    <button class="button-success" (click)="createNewHero()">Submit</button>
+  </div>
+  <!-- delete button -->
+  <div class="button" *ngIf="!isCreating">
+    <button class="button-error" (click)="deleteHero()">Delete</button>
+  </div>
 </div>

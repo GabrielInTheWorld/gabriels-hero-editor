@@ -43,6 +43,7 @@ npm-debug.log
 yarn-error.log
 testem.log
 package-lock.json
+/angular-tour-of-heroes/package-lock.json
 /angular-tour-of-heroes/typings
 
 # System Files
@@ -50,5 +51,5 @@ package-lock.json
 Thumbs.db
 
 # Binary files
-/flask-server/heroes.db
+*.db
 *.sql
