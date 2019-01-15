@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <!-- html-nodes -->
+        <h2>Hello World!</h2>
+        <input id="hello" name="hello" />
+        <button onclick="send(hello.value)">Send</button>
+
+        <!-- script-tags -->
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            var socket = io.connect('http://' + document.domain + ':' + location.port + '/ws');
+
+            /**
+             * Function to send a message to the server which will sending around to all connected clients
+             * @param {data} The message what would be sent to the server
+             */
+            function send(data){
+                socket.emit('send', {data: data});
+            }
+
+            // Functions for the websocket-connection
+            /**
+             * This function will recognize, if a new hero is created
+             */
+            socket.on('create', function(data){
+                console.log('Created a new hero: ', data);
+            });
+
+            /**
+             * This function will recognize, if a hero has been updated
+             */
+            socket.on('update', function(data){
+                console.log('Updated a hero with id: ', data);
+            });
+
+            /**
+             * This function will recognize, if a hero was deleted
+             */
+            socket.on('delete', function(data){
+                console.log('Deleted a hero with id: ', data);
+            });
+
+            /**
+             * This function receives a broadcast-message and show it
+             */
+            socket.on('broadcast', function(data){
+                console.log('Receives message: ', data);
+            });
+        </script>
+    </body>
+</html>
