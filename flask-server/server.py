@@ -107,12 +107,6 @@ def closeConnection(exception):
     if db is not None:
         db.close()
 
-# routes
-# Default route - returns a default html-page
-@app.route('/')
-def index():
-    return render_template('index.html')
-
 # Route to get all heroes stored in the database
 # Only GET-method
 @app.route('/heroes', methods=['GET'])
