@@ -6,6 +6,10 @@
 /angular-tour-of-heroes/out-tsc
 /angular-tour-of-heroes/documentation
 
+# python server environment
+/flask-server/venv
+/flask-server/__pycache__
+
 # dependencies
 /angular-tour-of-heroes/node_modules
 
@@ -21,6 +25,7 @@ speed-measure-plugin.json
 *.launch
 .settings/
 *.sublime-workspace
+.vscode/
 
 # IDE - VSCode
 .vscode/*
@@ -37,8 +42,13 @@ speed-measure-plugin.json
 npm-debug.log
 yarn-error.log
 testem.log
+package-lock.json
 /angular-tour-of-heroes/typings
 
 # System Files
 .DS_Store
 Thumbs.db
+
+# Binary files
+/flask-server/heroes.db
+*.sql
