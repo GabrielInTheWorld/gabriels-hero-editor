@@ -32,3 +32,22 @@ button:disabled {
   color: #ccc;
   cursor: auto;
 }
+
+div.button {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+div.button button {
+  margin: 0;
+}
+
+div.button .button-success {
+  background-color: green;
+  color: white;
+}
+
+div.button .button-error{
+  background-color: red;
+  color: white;
+}

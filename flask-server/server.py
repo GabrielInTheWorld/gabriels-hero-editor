@@ -1,7 +1,14 @@
 # External imports 
+from gevent import monkey
 from flask import Flask, request, g, current_app, jsonify, render_template
-from flask_socketio import SocketIO
+from flask_sockets import Sockets
+from flask_uwsgi_websocket import GeventWebSocket
+from flask_cors import CORS
+from gevent.pywsgi import WSGIServer
+from geventwebsocket.handler import WebSocketHandler
 import sqlite3 as sql
+import json
+import os, sys
 
 # Environment-variables for the application-server
 app = Flask(__name__)
@@ -9,12 +16,13 @@ app.config['SECRET_KEY'] = 'secret!'
 app.debug = True
 app.auto_reload = True
 app.env = 'development'
+sockets = Sockets(app)
 
-# SocketIO-initialization
-socketio = SocketIO(app)
+# List for the client-connection
+wsList = []
 
-# Connection to the database
-DATABASE = 'flask-server/heroes.db'
+# CORS-enabled
+CORS(app)
 
 # The database could be extracted as an own class.
 # This feature was not implemented, because this is only a testing-area and won't be used in production.
@@ -22,6 +30,9 @@ DATABASE = 'flask-server/heroes.db'
 
 # Gets the db-connection from the g-object in the flask-instance
 def getDB():
+    # Get the path of the started script to set the path of the database relative to it.
+    dirname = os.path.split(os.path.abspath(sys.argv[0]))[0]
+    DATABASE = os.path.join(dirname, 'heroes.db')
     db = getattr(g, '_database', None)
     if db is None:
         db = g._database = sql.connect(DATABASE)
@@ -165,7 +176,6 @@ def routeUpdate():
         successful = updateHero(paramId, paramName)
         if successful:
             print('successful')
-            # socketio.emit('update', {'data': paramId}, broadcast=True, namespace='/ws')
             broadcast('update', paramId)
             return sendSuccessful('Ok')
         else:
@@ -177,34 +187,37 @@ def routeUpdate():
 # the server sends a broadcast-message to all connected clients,
 # so the clients could update themselves
 # Only DELETE-method
-@app.route('/delete', methods=['DELETE'])
-def routeDelete():
+@app.route('/delete/<id>', methods=['DELETE'])
+def routeDelete(id):
     if request.method == 'DELETE':
         try:
-            paramId = request.json.get('id')
-            deleteHero(paramId)
-            broadcast('delete', paramId)
+            deleteHero(id)
+            broadcast('update', str(id))
             return sendSuccessful('Deletion ok!')
         except Exception as e:
             return sendError(e)
     return 'delete'
 
-# SocketIO
-# Default method to recognize when a client connects
-@socketio.on('connect', namespace='/ws')
-def connect():
-    print('Someone connected.')
+# Function to handle websocket-registration
+# While a websocket is not closed it will be added to the list of clients,
+# otherwise it will be removed from this.
+@sockets.route('/ws')
+def handleWebsocket(ws):
+    global wsList
+    wsList.append(ws)
+    while not ws.closed:
+        message = ws.receive()
+        ws.send(message)
 
-# Default method for testing the websocket-connection
-@socketio.on('send', namespace='/ws')
-def myEvent(data):
-    print(data)
-    socketio.emit('broadcast', data, json=True, broadcast=True, namespace='/ws')
-
-# Default method to recognize when a client disconnects
-@socketio.on('disconnect', namespace='/ws')
-def disconnect():
-    print('Someone leaves the session.')
+# Funtion to send a broadcast-message to all connected clients
+def broadcast(type, message):
+    print('sending broadcast message:', message)
+    global wsList
+    for ws in wsList:
+        if not ws.closed:
+            ws.send(json.dumps({'type': type, 'message': message}))
+        else:
+            wsList.remove(ws)
 
 # General methods
 # Method to return a 'successful'-message to the connected client sending a request
@@ -215,11 +228,8 @@ def sendSuccessful(message):
 def sendError(error):
     return jsonify({'data': '503', 'message': error})
 
-# Method to send a broadcast-message to all connected clients
-def broadcast(identifier, data):
-    socketio.emit(identifier, data, json=True, broadcast=True, namespace='/ws')
-
 # Main-method to start the server with websockets
 if __name__ == '__main__':
     initialStartDB()
-    socketio.run(app, '127.0.0.1', 8080)
+    httpServer = WSGIServer(('', 8000), app, handler_class=WebSocketHandler)
+    httpServer.serve_forever()

@@ -38,6 +38,12 @@ nav a.active {
   color: #039be5;
 }
 
+a.button-link{
+  margin: 0 5px;
+  background-color: #2364e7 !important;
+  color: #fff !important;
+}
+
 /*
 * everywhere else
 */

@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     // get the related heroes for the dashboard
     this.getHeroes();
+    this.onWatch();
   }
 
   /**
@@ -47,6 +48,19 @@ export class DashboardComponent implements OnInit {
   getHeroes(): void {
     this.heroService.getHeroes()
     .subscribe(heroes => this.heroes = heroes.slice(1, 5));
+  }
+
+  /**
+   * Private function to subscribe to the websocket-connection from hero-service.
+   * If the server sends an update, this component will read information from server once again.
+   */
+  private onWatch(): void {
+    this.heroService.getWebsocket()
+    .subscribe(event => {
+      if (event['type'] === 'update') {
+        this.getHeroes();
+      }
+    });
   }
 
 }
