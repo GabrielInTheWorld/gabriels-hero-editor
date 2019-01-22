@@ -15,7 +15,7 @@ import {HeroService} from '../hero.service';
 @Component({
   selector: 'app-hero-detail',
   templateUrl: './hero-detail.component.html',
-  styleUrls: ['./hero-detail.component.css']
+  styleUrls: ['./hero-detail.component.scss']
 })
 export class HeroDetailComponent implements OnInit {
 
@@ -26,6 +26,16 @@ export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero;
 
   /**
+   * A default placeholder for the input in the detail-view.
+   */
+  placeholder = 'Awesome name of the hero...';
+
+  /**
+   * The default label for the input in the detail-view.
+   */
+  label = 'The heroe\'s name';
+
+  /**
    * Boolean to check if a new hero is creating.
    * Is so, show a button to submit this new entry,
    * otherwise the button won't be shown.
@@ -34,6 +44,7 @@ export class HeroDetailComponent implements OnInit {
 
   /**
    * constructor
+   * @param router The router for the whole app - to navigate back.
    * @param location get the app's Location to go back.
    * @param activeRoute hold the ActivatedRoute to get the param from URL.
    * @param heroService injects the HeroService to fetch a specific hero.

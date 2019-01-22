@@ -1,0 +1,28 @@
+@mixin dashboard-component($theme) {
+  $primary: map-get($map: $theme, $key: primary);
+  $accent: map-get($theme, accent);
+
+  .gm-hero-divider {
+    margin-bottom: 8px;
+  }
+
+  .gm-hero-table {
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    color: mat-color($primary, lighter);
+    cursor: pointer;
+
+    &:hover {
+      color: mat-color($accent, darker);
+    }
+  }
+
+  .gm-hero-tile {
+    text-align: center;
+
+    .gm-hero-title {
+      display: block;
+    }
+  }
+}

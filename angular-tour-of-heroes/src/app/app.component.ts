@@ -14,8 +14,4 @@ import { Component } from '@angular/core';
  * Exports the class AppComponent.
  */
 export class AppComponent {
-  /**
-   * Classmember title which contains the title of the app.
-   */
-  title = 'Tour of Heroes';
 }

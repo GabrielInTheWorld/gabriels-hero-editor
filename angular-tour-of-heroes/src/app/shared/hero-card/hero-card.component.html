@@ -1,0 +1,11 @@
+<mat-card class="gm-hero-card">
+  <mat-card-header>
+    <div mat-card-avatar class="gm-hero-avatar"></div>
+    <mat-card-title>{{ title }}</mat-card-title>
+    <mat-card-subtitle>{{ subTitle }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content *ngIf="hasContent">
+    <ng-content></ng-content>
+  </mat-card-content>
+  <mat-card-actions *ngIf="hasActions"></mat-card-actions>
+</mat-card>

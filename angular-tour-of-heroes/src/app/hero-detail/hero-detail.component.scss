@@ -1,0 +1,16 @@
+.gm-hero-detail {
+  margin: 12px 0;
+}
+
+@mixin hero-detail-component($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+
+  .gm-hero-color-primary {
+    color: mat-color($primary, default);
+  }
+
+  .gm-hero-color-accent {
+    color: mat-color($warn, default);
+  }
+}

@@ -1,5 +1,6 @@
 // external imports
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
 
 // internal components
 import {Hero} from '../hero';
@@ -13,7 +14,7 @@ import {HeroService} from '../hero.service';
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.css']
+  styleUrls: ['./heroes.component.scss']
 })
 
 /**
@@ -31,7 +32,10 @@ export class HeroesComponent implements OnInit {
    * constructor
    * @param heroService injects the HeroService as private member to fetch asynchronous hero-data.
    */
-  constructor(private heroService: HeroService) { }
+  constructor(
+    private heroService: HeroService,
+    private router: Router
+  ) { }
 
   /**
    * init-function
@@ -48,6 +52,14 @@ export class HeroesComponent implements OnInit {
   private getHeroes(): void {
     this.heroService.getHeroes()
     .subscribe(heroes => this.heroes = heroes);
+  }
+
+  /**
+   * Function to go to the detail-view of the selected hero.
+   * @param hero This is the id of the selected hero.
+   */
+  goToHero(hero: number): void {
+    this.router.navigateByUrl(`/detail/${hero}`);
   }
 
   /**

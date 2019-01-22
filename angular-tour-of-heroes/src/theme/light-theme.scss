@@ -1,0 +1,10 @@
+// light theme
+$light-primary: mat-palette($mat-indigo, 500, 300, 700);
+$light-accent: mat-palette($mat-red, 500, 700, 900);
+$light-warn: mat-palette($mat-deep-orange, A200);
+
+$the-light-theme: mat-light-theme(
+  $light-primary,
+  $light-accent,
+  $light-warn
+);

@@ -1,20 +1,16 @@
 <div *ngIf="hero">
   <h2>{{ hero.name | uppercase }} Details</h2>
   <!-- details of a hero -->
-  <div><span>id: </span>{{ hero.id }}</div>
-  <div>
-    <label>name:
-      <input [ngModel]="hero.name" (ngModelChange)="onChange($event)" placeholder="name" />
-    </label>
+  <div class="gm-hero-detail">
+    <span>id: </span>{{ hero.id }}
   </div>
-  <!-- back button -->
-  <button (click)="goBack()">Go back</button>
-  <!-- submit button -->
-  <div class="button" *ngIf="isCreating && hero.name !== ''">
-    <button class="button-success" (click)="createNewHero()">Submit</button>
-  </div>
-  <!-- delete button -->
-  <div class="button" *ngIf="!isCreating">
-    <button class="button-error" (click)="deleteHero()">Delete</button>
+  <app-big-input [label]="label" [placeholder]="placeholder" [value]="hero.name" (changed)="onChange($event)"></app-big-input>
+  <div class="gm-hero-button-bar">
+    <!-- back button -->
+    <button mat-button (click)="goBack()">Go back</button>
+    <!-- submit button -->
+    <button mat-button class="gm-hero-color-primary" *ngIf="isCreating && hero.name !== ''" (click)="createNewHero()">Submit</button>
+    <!-- delete button -->
+    <button mat-button class="gm-hero-color-accent" *ngIf="!isCreating" (click)="deleteHero()">Delete</button>
   </div>
 </div>

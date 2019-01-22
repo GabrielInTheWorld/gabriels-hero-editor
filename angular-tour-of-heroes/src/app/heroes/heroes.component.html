@@ -1,8 +1,4 @@
 <h2>My heroes</h2>
-<ul class="heroes">
-  <li *ngFor="let hero of heroes">
-    <a routerLink="/detail/{{ hero.id }}">
-      <span class="badge">{{ hero.id }}</span> {{ hero.name }}
-    </a>
-  </li>
-</ul>
+<mat-list class="gm-hero-list" role="list">
+  <app-hero-card *ngFor="let hero of heroes" [title]="hero.name" [subTitle]="hero.id" (click)="goToHero(hero.id)"></app-hero-card>
+</mat-list>

@@ -1,0 +1,23 @@
+@import '~@angular/material/theming';
+
+@mixin hero-card-component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .gm-hero-card {
+    .gm-hero-avatar {
+      background-image: url('https://images.dog.ceo/breeds/spaniel-cocker/n02102318_2971.jpg');
+      background-size: cover;
+    }
+
+    cursor: pointer;
+    margin: 0 0 8px;
+
+    &:hover {
+      box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
+    }
+  }
+}

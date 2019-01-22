@@ -1,0 +1,50 @@
+@import '~@angular/material/theming';
+
+// always include only once per project
+@include mat-core();
+
+//  import my custom themes
+@import 'theme/theme.scss';
+@import 'theme/dark-theme.scss';
+@import 'theme/light-theme.scss';
+
+// import all custom sources
+@import 'app/shared/big-input/big-input.component';
+@import 'app/shared/hero-card/hero-card.component';
+@import 'app/dashboard/dashboard.component';
+@import 'app/hero-nav-bar/hero-nav-bar.component';
+@import 'app/hero-detail/hero-detail.component';
+@import 'app/settings/settings.component';
+
+// mix all custom mixins
+@mixin custom-components-theme($theme) {
+  @include big-input-component-theme($theme);
+  @include hero-card-component-theme($theme);
+  @include dashboard-component($theme);
+  @include hero-nav-bar-component($theme);
+  @include settings-component($theme);
+  @include hero-detail-component($theme);
+}
+
+// include all theme-related mixins
+.gm-hero-theme {
+  @include angular-material-theme($the-awesome-theme);
+  @include custom-components-theme($the-awesome-theme);
+}
+
+.gm-hero-light-theme {
+  @include angular-material-theme($the-light-theme);
+  @include custom-components-theme($the-light-theme);
+}
+
+.gm-hero-dark-theme {
+  @include angular-material-theme($the-dark-theme);
+  @include custom-components-theme($the-dark-theme);
+}
+
+// define for body, html
+html, body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
