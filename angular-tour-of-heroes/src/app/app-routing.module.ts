@@ -1,21 +1,15 @@
 // external components
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 // internal components
-import {HeroesComponent} from './heroes/heroes.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
-import {HeroDetailComponent} from './hero-detail/hero-detail.component';
+import { routes as routeComponents } from '../environments/routes';
 
-const routes: Routes = [
-  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'heroes', component: HeroesComponent},
-  {path: 'detail/:id', component: HeroDetailComponent}
-];
-
+/**
+ * Componentdecorator
+ */
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routeComponents)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

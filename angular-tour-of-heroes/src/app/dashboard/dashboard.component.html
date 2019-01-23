@@ -1,8 +1,18 @@
-<h3>Top Heroes</h3>
-<div class="grid grid-pad">
-  <a *ngFor="let hero of heroes" class="col-1-4" routerLink="/detail/{{ hero.id }}">
-    <div class="module hero">
-      <h4>{{ hero.name }}</h4>
-    </div>
-  </a>
+<div id="gmHeroDashboard">
+  <h3>Top Heroes</h3>
+  <mat-divider class="gm-hero-divider"></mat-divider>
+  <mat-grid-list cols="6">
+    <mat-grid-tile *ngFor="let hero of heroes" routerLink="/detail/{{ hero.id }}">
+      <table class="gm-hero-table">
+        <tbody>
+          <td class="gm-hero-tile">
+            <div>
+              <h4 class="gm-hero-title">{{ hero.name }}</h4>
+              <p class="subtitle">Ein Superheld</p>
+            </div>
+          </td>
+        </tbody>
+      </table>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>

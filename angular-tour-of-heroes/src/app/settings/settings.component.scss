@@ -1,0 +1,21 @@
+@import '~@angular/material/theming';
+
+.gm-hero-button-bar button {
+  margin: 0 8px;
+}
+
+@mixin settings-component($theme) {
+  $default-primary: map-get($map: $theme, $key: primary);
+
+  #defaultTheme {
+    background: #303f9f;
+  }
+
+  #lightTheme {
+    background: #3f51b5;
+  }
+
+  #darkTheme {
+    background: #e91e63;
+  }
+}

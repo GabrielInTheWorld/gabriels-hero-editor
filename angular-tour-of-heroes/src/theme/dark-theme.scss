@@ -1,0 +1,10 @@
+// dark theme
+$dark-primary: mat-palette($mat-pink);
+$dark-accent: mat-palette($mat-indigo, 700, 500, 900);
+$dark-warn: mat-palette($mat-orange);
+
+$the-dark-theme: mat-dark-theme(
+  $dark-primary,
+  $dark-accent,
+  $dark-warn
+);

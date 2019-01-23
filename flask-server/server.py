@@ -124,9 +124,9 @@ def closeConnection(exception):
 def routeAllHeroes():
     try:
         heroes = getAllHeroes()
-        heroesData = {}
+        heroesData = []
         for value in heroes:
-            heroesData[value[0]] = value[1]
+            heroesData.append({'id': value[0], 'name': str(value[1])})
         return sendSuccessful(heroesData)
     except Exception as e:
         print('Error: ', e)
@@ -139,11 +139,12 @@ def routeAllHeroes():
 # Only POST-method
 @app.route('/create', methods = ['POST'])
 def routeCreate():
+    print('Create method')
     if request.method == 'POST':
         try:
             paramName = request.json.get('name')
             createHero(paramName)
-            broadcast('create', 'HERO')
+            broadcast('update', 'HERO')
             return sendSuccessful('Ok')
         except Exception as e:
             print('Something went wrong while parsing params...', e)
@@ -157,7 +158,11 @@ def routeGet(id):
     if request.method == 'GET':
         try:
             hero = getHero(id)
-            return sendSuccessful({hero[0]: hero[1]})
+            print('hero:', hero)
+            if hero is not None:
+                return sendSuccessful({'id': hero[0], 'name': hero[1]})
+            else:
+                return sendError('No hero.')
         except Exception as e:
             return sendError(e)
     else:
