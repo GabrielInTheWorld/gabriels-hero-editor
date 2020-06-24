@@ -12,8 +12,8 @@ export const environment = {
  * Constant to set the URL and port of the server and the websocket.
  */
 export const SERVER_URL = {
-  server: 'http://127.0.0.1:8000',
-  websocket: 'ws://127.0.0.1:8000/ws'
+  server: "http://0.0.0.0:8000",
+  websocket: "ws://0.0.0.0:8000/ws"
 };
 
 /*
