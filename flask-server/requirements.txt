@@ -1,7 +1,7 @@
 Flask-Server
 
 # requirements
-eventlet == 0.24.1
+eventlet == 0.31.0
 flask == 1.0.2
 flask_cors == 3.0.7
 flask_sockets == 0.2.1
